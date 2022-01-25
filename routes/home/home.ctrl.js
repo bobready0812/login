@@ -9,6 +9,6 @@ const login = (req, res) => {
 };
 
 module.exports = {
-    hello,
+    home,
     login,
 }
