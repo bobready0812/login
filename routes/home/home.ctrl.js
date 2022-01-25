@@ -1,6 +1,6 @@
 "use strict";
 
-const hello = (req, res) => {
+const home = (req, res) => {
     res.render("home/index");
 };
 
