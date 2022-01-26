@@ -17,6 +17,5 @@ app.set("view engine", "ejs");
 
 app.use("/", home); //use --> 미들 웨어 등록;
 
-app.listen(POST, () => {
- console.log("서버 가동");
-}); 
+
+module.exports = app;
