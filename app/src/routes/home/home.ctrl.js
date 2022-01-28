@@ -21,9 +21,7 @@ const process = {
     login:(req, res) => {
        const id = req.body.id;
        const psword = req.body.psword;
-        
-       const userStorage = new UserStorage();
-       console.log(userStorage.user);
+       console.log(UserStorage.user);
 //        const response = {};
 //        if (user.id.includes(id)) {
 //            const idx = user.id.indexOf(id);
@@ -35,8 +33,8 @@ const process = {
 //        response.success = false;
 //        response.msg = "로그인 실패";
 //        return res.json(response);
-//     },
-// };
+    },
+};
 
 
 

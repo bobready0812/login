@@ -2,7 +2,7 @@
 
 
 class UserStorage {
-    user = {
+   static user = {
         id: ["1", "2", "3"],
         psword: ["1", "2", "3"]
     }; 
