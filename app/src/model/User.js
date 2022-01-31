@@ -23,7 +23,8 @@ return { success: false, msg:"존재하지 않는 아이디 입니다"}
 
 register() {
     const client = this.body
-    UserStorage.save(client);
+    const response = UserStorage.save(client);
+    return response;
 }
 }
 
