@@ -16,8 +16,9 @@ class UserStorage {
         
     }
 
-    static #getUsers(data, fields) {
+    static #getUsers(data, isAll, fields) {
         const users = JSON.parse(data);
+        if(isAll) return users;
         const newUsers = fields.reduce((newUsers, field) => {
             if(users.hasOwnProperty(field)) {
                 newUsers[field] = users[field];
@@ -32,7 +33,7 @@ class UserStorage {
     static getUser(isAll, ...fields) {
         return fs.readFile("./src/databases/users.json")
         .then((data) => {
-          return this.#getUsers(data, fields);
+          return this.#getUsers(data, isAll, fields);
        
         })
         .catch(console.error);
@@ -55,8 +56,14 @@ class UserStorage {
 
 static async save(userInfo) {
     const users = await this.getUser(true);
-    console.log(users);
+    if(users.id.includes(userInfo.id)) {
+      return new Error("이미 존재하는 아이디입니다");
+    }
+    users.id.push(userInfo.id);
+    users.name.push(userInfo.name);
+    users.psword.push(userInfo.psword);
     fs.writeFile("./src/databases/users.json", JSON.stringify(users));
+    return {success: true}; 
 } 
 }
 
