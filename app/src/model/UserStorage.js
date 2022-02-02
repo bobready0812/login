@@ -16,17 +16,27 @@ class UserStorage {
         
     }
 
+    static #getUsers(data, fields) {
+        const users = JSON.parse(data);
+        const newUsers = fields.reduce((newUsers, field) => {
+            if(users.hasOwnProperty(field)) {
+                newUsers[field] = users[field];
+            }
+            return newUsers;
+        },{});
+        
+        return newUsers;
 
-    static getUser(...fields) {
-    //    const users = this.#user;
-       const newUsers = fields.reduce((newUsers, field) => {
-           if(users.hasOwnProperty(field)) {
-               newUsers[field] = users[field];
-           }
-           return newUsers;
-       },{});
+    }
+
+    static getUser(isAll, ...fields) {
+        return fs.readFile("./src/databases/users.json")
+        .then((data) => {
+          return this.#getUsers(data, fields);
        
-       return newUsers;
+        })
+        .catch(console.error);
+    
     }
 
     static getUserInfo(id) {
@@ -43,12 +53,10 @@ class UserStorage {
 
 
 
-static save(userInfo) {
-    //  const users = this.#user;
-    users.id.push(userInfo.id);
-    users.name.push(userInfo.name);
-    users.psword.push(userInfo.psword);
-    return { success: true};
+static async save(userInfo) {
+    const users = await this.getUser(true);
+    console.log(users);
+    fs.writeFile("./src/databases/users.json", JSON.stringify(users));
 } 
 }
 
