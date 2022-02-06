@@ -12,6 +12,9 @@ login : (req, res) => {
 },
 register: (req, res) => {
      res.render("home/register");
+},
+game: (req, res) => {
+  res.render("home/game");
 }
 
 };
